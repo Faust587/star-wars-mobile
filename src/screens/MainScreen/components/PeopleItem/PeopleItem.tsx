@@ -1,6 +1,6 @@
 import React, {FC, memo} from 'react';
 import {DataTable, IconButton} from 'react-native-paper';
-import {HeartIcon} from '../../../../shared/Icons/HeartIcon.tsx';
+import {HeartIcon} from '../../../../shared/components';
 import {SelectedPeopleType} from '../../../../redux/starWarsPeople/starWarsPeople.types.ts';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../../navigations/RootNavigation.tsx';

@@ -5,7 +5,7 @@ import {
 import React, {FC} from 'react';
 import {Text} from 'react-native';
 import {DataTable, IconButton} from 'react-native-paper';
-import {HeartIcon} from '../../../../shared/Icons/HeartIcon.tsx';
+import {HeartIcon} from '../../../../shared/components';
 import {useAppSelector} from '../../../../hooks/redux.ts';
 import {PeopleItem} from '../PeopleItem/PeopleItem.tsx';
 
