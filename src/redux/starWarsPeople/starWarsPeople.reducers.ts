@@ -1,20 +1,20 @@
 import {ActionReducerMapBuilder, PayloadAction} from '@reduxjs/toolkit';
-import {InitialStateType} from './starWarsPeople.types.ts';
+import {InitialStateType, SelectedPeopleType} from './starWarsPeople.types.ts';
 import {GetStarWarsPeople} from './starWarsPeople.thunk.ts';
 import {LoadingStatusEnum} from '../../enums/index.ts';
 
 export const LikePeopleReducer = (
   state: InitialStateType,
-  action: PayloadAction<string>,
+  action: PayloadAction<SelectedPeopleType>,
 ) => {
-  const peopleId = action.payload;
-  const isLiked = state.selectedPeople.find(item => item === peopleId);
+  const people = action.payload;
+  const isLiked = state.selectedPeople.find(item => item.name === people.name);
   if (isLiked) {
     state.selectedPeople = state.selectedPeople.filter(
-      item => item !== peopleId,
+      item => item.name !== people.name,
     );
   } else {
-    state.selectedPeople = [...state.selectedPeople, peopleId];
+    state.selectedPeople = [...state.selectedPeople, people];
   }
 };
 
@@ -36,4 +36,8 @@ export const GetStarWarsPeopleReducer = (
     state.list = action.payload.results;
     state.recordsCount = action.payload.count;
   });
+};
+
+export const ResetSelectedPeopleReducer = (state: InitialStateType) => {
+  state.selectedPeople = [];
 };

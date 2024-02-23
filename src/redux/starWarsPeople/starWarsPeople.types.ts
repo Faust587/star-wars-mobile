@@ -5,8 +5,10 @@ export type InitialStateType = {
   loading: LoadingStatusEnum;
   recordsCount: number | null;
   page: number;
-  selectedPeople: string[];
+  selectedPeople: SelectedPeopleType[];
 };
+
+export type SelectedPeopleType = {name: string; gender: string};
 
 export type StarWarsPeopleType = {
   name: string;

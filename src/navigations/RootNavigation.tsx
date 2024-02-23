@@ -1,10 +1,22 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {MainScreen} from '../screens/MainScreen/MainScreen.tsx';
+import {MainScreen, PeopleScreen} from '../screens';
+
+export type RootStackParamList = {
+  Main: undefined;
+  People: {name: string};
+};
 
 export const RootNavigation = () => {
-  const Stack = createNativeStackNavigator();
+  /**
+   * Values
+   */
+  const Stack = createNativeStackNavigator<RootStackParamList>();
+
+  /**
+   * Render
+   */
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main">
@@ -13,6 +25,7 @@ export const RootNavigation = () => {
           component={MainScreen}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="People" component={PeopleScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

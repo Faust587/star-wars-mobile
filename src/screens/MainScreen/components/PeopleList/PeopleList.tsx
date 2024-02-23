@@ -1,16 +1,20 @@
-import {StarWarsPeopleType} from '../../../../redux/starWarsPeople/starWarsPeople.types.ts';
+import {
+  SelectedPeopleType,
+  StarWarsPeopleType,
+} from '../../../../redux/starWarsPeople/starWarsPeople.types.ts';
 import React, {FC} from 'react';
 import {Text} from 'react-native';
 import {DataTable, IconButton} from 'react-native-paper';
 import {HeartIcon} from '../../../../shared/Icons/HeartIcon.tsx';
 import {useAppSelector} from '../../../../hooks/redux.ts';
+import {PeopleItem} from '../PeopleItem/PeopleItem.tsx';
 
 type PeopleListProps = {
   list: StarWarsPeopleType[];
   page: number;
   itemsCount: number;
   onPageChange: (page: number) => void;
-  onItemSelect: (id: string) => void;
+  onItemSelect: (people: SelectedPeopleType) => void;
 };
 
 export const PeopleList: FC<PeopleListProps> = ({
@@ -20,12 +24,21 @@ export const PeopleList: FC<PeopleListProps> = ({
   onItemSelect,
   onPageChange,
 }) => {
+  /**
+   * Hooks
+   */
   const selectedPeople = useAppSelector(
     state => state.starWarsPeople.selectedPeople,
   );
 
+  /**
+   * Values
+   */
   const pagesCount = Math.ceil(itemsCount / 10);
 
+  /**
+   * Render
+   */
   return (
     <DataTable>
       <DataTable.Header>
@@ -44,23 +57,24 @@ export const PeopleList: FC<PeopleListProps> = ({
       </DataTable.Header>
 
       {list.map(item => {
-        const isSelected = selectedPeople.find(people => people === item.name);
+        const isSelected = selectedPeople.find(
+          people => people.name === item.name,
+        );
+        const {name, gender, birth_year} = item;
+
         return (
-          <DataTable.Row key={item.name}>
-            <DataTable.Cell>
-              <IconButton
-                onPress={() => onItemSelect(item.name)}
-                iconColor={isSelected ? '#E24848' : '#000000'}
-                icon={HeartIcon}
-              />
-            </DataTable.Cell>
-            <DataTable.Cell>{item.name}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.birth_year}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.gender}</DataTable.Cell>
-          </DataTable.Row>
+          <PeopleItem
+            key={name}
+            name={name}
+            gender={gender}
+            birth_year={birth_year}
+            isSelected={!!isSelected}
+            onItemSelect={onItemSelect}
+          />
         );
       })}
 
+      {/*Need to install fonts to display arrows*/}
       <DataTable.Pagination
         page={page}
         numberOfPages={pagesCount}

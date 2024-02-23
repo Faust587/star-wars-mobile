@@ -4,3 +4,8 @@ export enum LoadingStatusEnum {
   SUCCESS = 'success',
   FAILED = 'failed',
 }
+
+export enum PeopleGender {
+  FEMALE = 'female',
+  MALE = 'male',
+}

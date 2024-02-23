@@ -4,6 +4,7 @@ import {
   ChangePeoplePageReducer,
   GetStarWarsPeopleReducer,
   LikePeopleReducer,
+  ResetSelectedPeopleReducer,
 } from './starWarsPeople.reducers.ts';
 
 const starWarsPeopleSlice = createSlice({
@@ -12,6 +13,7 @@ const starWarsPeopleSlice = createSlice({
   reducers: {
     LikePeople: LikePeopleReducer,
     ChangePeoplePage: ChangePeoplePageReducer,
+    ResetSelectedPeople: ResetSelectedPeopleReducer,
   },
   extraReducers: GetStarWarsPeopleReducer,
 });
