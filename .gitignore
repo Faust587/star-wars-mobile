@@ -20,8 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-ios/.xcode.env.local
-ios/starWarsMobile.xcodeproj/project.pbxproj
 
 yarn.lock
 
